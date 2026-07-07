@@ -1,5 +1,6 @@
 import { error, json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
+import YAML from 'yaml';
 
 export const GET: RequestHandler = async ({ params }) => {
 	const { id } = params;
@@ -28,8 +29,11 @@ export const GET: RequestHandler = async ({ params }) => {
 				// It was a JSON-encoded YAML string, so unescape it
 				config = parsed;
 			} else if (typeof parsed === 'object') {
-				// It was a JSON object, pretty print it
-				config = JSON.stringify(parsed, null, 2);
+				// Extract the actual config field if Benthos wraps it in stream metadata
+				const actualConfig = parsed.config !== undefined ? parsed.config : parsed;
+				// Convert the object to true YAML. This will automatically turn
+				// multiline strings (with \n) into proper YAML block scalars (using |)
+				config = YAML.stringify(actualConfig);
 			}
 		} catch (e) {
 			// Not JSON, presumably it's raw YAML already. Leave it as is.
