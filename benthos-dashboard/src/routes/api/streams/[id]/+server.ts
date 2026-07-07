@@ -11,16 +11,16 @@ export const GET: RequestHandler = async ({ params }) => {
 		// We explicitly ask for YAML to avoid unformatted JSON strings with escaped \n
 		const res = await fetch(`http://benthos:4195/streams/${id}`, {
 			headers: {
-				'Accept': 'application/yaml'
+				Accept: 'application/yaml'
 			}
 		});
 		if (!res.ok) {
 			const errorText = await res.text();
 			return error(res.status, `Benthos API error: ${errorText}`);
 		}
-		
+
 		let config = await res.text();
-		
+
 		try {
 			// Benthos might return the config as a JSON-encoded string (e.g. "\"input:\\n...\"")
 			// or as a JSON object if YAML isn't requested properly.
@@ -56,12 +56,12 @@ export const POST: RequestHandler = async ({ params, request }) => {
 			headers: { 'Content-Type': 'application/yaml' },
 			body: yamlConfig
 		});
-		
+
 		if (!res.ok) {
 			const errorText = await res.text();
 			return error(res.status, `Benthos API error: ${errorText}`);
 		}
-		
+
 		return json({ success: true, id });
 	} catch (e) {
 		return error(500, String(e));
@@ -81,12 +81,12 @@ export const PUT: RequestHandler = async ({ params, request }) => {
 			headers: { 'Content-Type': 'application/yaml' },
 			body: yamlConfig
 		});
-		
+
 		if (!res.ok) {
 			const errorText = await res.text();
 			return error(res.status, `Benthos API error: ${errorText}`);
 		}
-		
+
 		return json({ success: true, id });
 	} catch (e) {
 		return error(500, String(e));
@@ -101,12 +101,12 @@ export const DELETE: RequestHandler = async ({ params }) => {
 		const res = await fetch(`http://benthos:4195/streams/${id}`, {
 			method: 'DELETE'
 		});
-		
+
 		if (!res.ok) {
 			const errorText = await res.text();
 			return error(res.status, `Benthos API error: ${errorText}`);
 		}
-		
+
 		return json({ success: true, id });
 	} catch (e) {
 		return error(500, String(e));

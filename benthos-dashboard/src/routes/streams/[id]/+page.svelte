@@ -46,7 +46,7 @@
 
 	const handleDelete = async () => {
 		if (!confirm(`Are you sure you want to delete the stream "${streamId}"?`)) return;
-		
+
 		submitting = true;
 		errorMsg = null;
 
@@ -78,7 +78,19 @@
 
 <main class="dashboard-main form-container">
 	<a href="/" class="back-link">
-		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			width="16"
+			height="16"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"
+			></polyline></svg
+		>
 		Back to Dashboard
 	</a>
 
@@ -91,7 +103,19 @@
 		<div class="stream-card stream-form">
 			{#if errorMsg}
 				<div class="form-error">
-					<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="18"
+						height="18"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"
+						></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg
+					>
 					{errorMsg}
 				</div>
 			{/if}
@@ -175,7 +199,8 @@
 		margin-top: 0.5rem;
 	}
 
-	.submit-btn, .delete-btn {
+	.submit-btn,
+	.delete-btn {
 		flex: 1;
 		color: white;
 		border: none;
@@ -184,7 +209,9 @@
 		font-size: 1rem;
 		font-weight: 600;
 		cursor: pointer;
-		transition: opacity 0.2s, transform 0.1s;
+		transition:
+			opacity 0.2s,
+			transform 0.1s;
 	}
 
 	.submit-btn {
@@ -197,12 +224,14 @@
 		box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4);
 	}
 
-	.submit-btn:hover:not(:disabled), .delete-btn:hover:not(:disabled) {
+	.submit-btn:hover:not(:disabled),
+	.delete-btn:hover:not(:disabled) {
 		opacity: 0.9;
 		transform: translateY(-1px);
 	}
 
-	.submit-btn:disabled, .delete-btn:disabled {
+	.submit-btn:disabled,
+	.delete-btn:disabled {
 		opacity: 0.5;
 		cursor: not-allowed;
 	}

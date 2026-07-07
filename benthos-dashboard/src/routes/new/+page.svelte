@@ -3,7 +3,9 @@
 	import CodeEditor from '$lib/components/CodeEditor.svelte';
 
 	let streamId = $state('');
-	let yamlConfig = $state('input:\n  generate:\n    mapping: \'root = "hello"\'\n    interval: 1s\n    count: 10\noutput:\n  drop: {}');
+	let yamlConfig = $state(
+		'input:\n  generate:\n    mapping: \'root = "hello"\'\n    interval: 1s\n    count: 10\noutput:\n  drop: {}'
+	);
 	let submitting = $state(false);
 	let errorMsg = $state<string | null>(null);
 
@@ -54,21 +56,56 @@
 
 <main class="dashboard-main form-container">
 	<a href="/" class="back-link">
-		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			width="16"
+			height="16"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"
+			></polyline></svg
+		>
 		Back to Dashboard
 	</a>
 
 	<form class="stream-form stream-card" onsubmit={handleSubmit}>
 		{#if errorMsg}
 			<div class="form-error">
-				<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="18"
+					height="18"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line
+						x1="12"
+						y1="16"
+						x2="12.01"
+						y2="16"
+					></line></svg
+				>
 				{errorMsg}
 			</div>
 		{/if}
 
 		<div class="form-group">
 			<label for="streamId">Stream ID</label>
-			<input type="text" id="streamId" bind:value={streamId} placeholder="e.g., my_custom_pipeline" required class="premium-input" />
+			<input
+				type="text"
+				id="streamId"
+				bind:value={streamId}
+				placeholder="e.g., my_custom_pipeline"
+				required
+				class="premium-input"
+			/>
 		</div>
 
 		<div class="form-group">
@@ -148,7 +185,9 @@
 		font-size: 1rem;
 		font-weight: 600;
 		cursor: pointer;
-		transition: opacity 0.2s, transform 0.1s;
+		transition:
+			opacity 0.2s,
+			transform 0.1s;
 		box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
 	}
 

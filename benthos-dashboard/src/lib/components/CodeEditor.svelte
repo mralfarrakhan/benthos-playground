@@ -2,7 +2,7 @@
 	import Prism from 'prismjs';
 	import 'prismjs/components/prism-yaml';
 	import 'prismjs/themes/prism-tomorrow.css'; // A beautiful dark theme
-	
+
 	let { value = $bindable(''), id = 'code-editor' } = $props<{ value: string; id?: string }>();
 	let textareaRef: HTMLTextAreaElement;
 	let preRef: HTMLPreElement;
@@ -16,15 +16,16 @@
 </script>
 
 <div class="editor-container">
-	<pre class="syntax-overlay" bind:this={preRef} aria-hidden="true"><code class="language-yaml">{@html Prism.highlight(value, Prism.languages.yaml, 'yaml')}</code><br/></pre>
+	<pre class="syntax-overlay" bind:this={preRef} aria-hidden="true"><code class="language-yaml"
+			>{@html Prism.highlight(value, Prism.languages.yaml, 'yaml')}</code
+		><br /></pre>
 	<textarea
 		{id}
 		bind:value
 		bind:this={textareaRef}
 		class="code-textarea"
 		spellcheck="false"
-		onscroll={handleScroll}
-	></textarea>
+		onscroll={handleScroll}></textarea>
 </div>
 
 <style>
@@ -38,7 +39,8 @@
 		overflow: hidden;
 	}
 
-	.syntax-overlay, .code-textarea {
+	.syntax-overlay,
+	.code-textarea {
 		margin: 0 !important;
 		border: 0;
 		padding: 1rem;
@@ -62,7 +64,7 @@
 		z-index: 1;
 		background: transparent !important; /* override prism theme */
 	}
-	
+
 	.syntax-overlay code {
 		font-family: inherit;
 		font-size: inherit;
