@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import CodeEditor from '$lib/components/CodeEditor.svelte';
 
 	let streamId = $state('');
 	let yamlConfig = $state('input:\n  generate:\n    mapping: \'root = "hello"\'\n    interval: 1s\n    count: 10\noutput:\n  drop: {}');
@@ -72,9 +73,7 @@
 
 		<div class="form-group">
 			<label for="yamlConfig">YAML Configuration</label>
-			<div class="editor-container">
-				<textarea id="yamlConfig" bind:value={yamlConfig} required class="premium-textarea" spellcheck="false"></textarea>
-			</div>
+			<CodeEditor bind:value={yamlConfig} id="yamlConfig" />
 		</div>
 
 		<button type="submit" class="submit-btn" disabled={submitting}>
@@ -122,7 +121,7 @@
 		text-transform: uppercase;
 	}
 
-	.premium-input, .premium-textarea {
+	.premium-input {
 		background: rgba(15, 23, 42, 0.5);
 		border: 1px solid var(--card-border);
 		border-radius: 8px;
@@ -133,35 +132,10 @@
 		transition: all 0.2s;
 	}
 
-	.premium-input:focus, .premium-textarea:focus {
+	.premium-input:focus {
 		outline: none;
 		border-color: var(--accent-primary);
 		box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
-	}
-
-	.editor-container {
-		position: relative;
-		border-radius: 8px;
-		background: #1e1e1e; /* Dark theme for code */
-		border: 1px solid var(--card-border);
-		overflow: hidden;
-	}
-
-	.premium-textarea {
-		width: 100%;
-		min-height: 300px;
-		background: transparent;
-		border: none;
-		color: #d4d4d4; /* VS Code light theme text */
-		font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
-		font-size: 0.9rem;
-		line-height: 1.5;
-		padding: 1rem;
-		resize: vertical;
-	}
-	
-	.premium-textarea:focus {
-		box-shadow: none;
 	}
 
 	.submit-btn {

@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
+	import CodeEditor from '$lib/components/CodeEditor.svelte';
 
 	let streamId = $derived($page.params.id);
 	let yamlConfig = $state('');
@@ -97,9 +98,7 @@
 
 			<div class="form-group">
 				<label for="yamlConfig">YAML Configuration</label>
-				<div class="editor-container">
-					<textarea id="yamlConfig" bind:value={yamlConfig} required class="premium-textarea" spellcheck="false"></textarea>
-				</div>
+				<CodeEditor bind:value={yamlConfig} id="yamlConfig" />
 			</div>
 
 			<div class="button-group">
@@ -168,32 +167,6 @@
 		color: var(--text-secondary);
 		letter-spacing: 0.05em;
 		text-transform: uppercase;
-	}
-
-	.editor-container {
-		position: relative;
-		border-radius: 8px;
-		background: #1e1e1e; /* Dark theme for code */
-		border: 1px solid var(--card-border);
-		overflow: hidden;
-	}
-
-	.premium-textarea {
-		width: 100%;
-		min-height: 400px;
-		background: transparent;
-		border: none;
-		color: #d4d4d4; /* VS Code light theme text */
-		font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
-		font-size: 0.9rem;
-		line-height: 1.5;
-		padding: 1rem;
-		resize: vertical;
-	}
-	
-	.premium-textarea:focus {
-		outline: none;
-		box-shadow: inset 0 0 0 1px var(--accent-primary);
 	}
 
 	.button-group {
