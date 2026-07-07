@@ -17,6 +17,12 @@
 				return null;
 			});
 
+	const formatActiveSince = (uptimeSeconds: number) => {
+		const pastDate = new Date(Date.now() - uptimeSeconds * 1000);
+		// Format: "Active since Mar 15, 14:30"
+		return `Active since ${pastDate.toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}, ${pastDate.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })}`;
+	};
+
 	onMount(async () => {
 		benthosStreams = await getStreams();
 		loading = false;
@@ -95,7 +101,7 @@
 					<div class="card-body">
 						<div class="metric">
 							<span class="metric-label">Uptime</span>
-							<span class="metric-value">{info.uptime_str || `${info.uptime.toFixed(2)}s`}</span>
+							<span class="metric-value" style="font-size: 1rem;">{formatActiveSince(info.uptime)}</span>
 						</div>
 						<div class="metric">
 							<span class="metric-label">Status</span>
@@ -103,7 +109,7 @@
 						</div>
 					</div>
 					<div class="card-footer">
-						<button class="action-btn" aria-label="View details for {id}">View Details</button>
+						<a href="/streams/{id}" class="action-btn" style="text-decoration: none; display: block; text-align: center; box-sizing: border-box;" aria-label="View details for {id}">View Details</a>
 					</div>
 				</article>
 			{/each}
