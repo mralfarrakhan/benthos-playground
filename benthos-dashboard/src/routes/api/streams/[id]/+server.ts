@@ -7,13 +7,34 @@ export const GET: RequestHandler = async ({ params }) => {
 
 	try {
 		// Fetch stream configuration (Benthos returns YAML/JSON for a specific stream config)
-		const res = await fetch(`http://benthos:4195/streams/${id}`);
+		// We explicitly ask for YAML to avoid unformatted JSON strings with escaped \n
+		const res = await fetch(`http://benthos:4195/streams/${id}`, {
+			headers: {
+				'Accept': 'application/yaml'
+			}
+		});
 		if (!res.ok) {
 			const errorText = await res.text();
 			return error(res.status, `Benthos API error: ${errorText}`);
 		}
 		
-		const config = await res.text();
+		let config = await res.text();
+		
+		try {
+			// Benthos might return the config as a JSON-encoded string (e.g. "\"input:\\n...\"")
+			// or as a JSON object if YAML isn't requested properly.
+			const parsed = JSON.parse(config);
+			if (typeof parsed === 'string') {
+				// It was a JSON-encoded YAML string, so unescape it
+				config = parsed;
+			} else if (typeof parsed === 'object') {
+				// It was a JSON object, pretty print it
+				config = JSON.stringify(parsed, null, 2);
+			}
+		} catch (e) {
+			// Not JSON, presumably it's raw YAML already. Leave it as is.
+		}
+
 		return json({ id, config });
 	} catch (e) {
 		return error(500, String(e));
