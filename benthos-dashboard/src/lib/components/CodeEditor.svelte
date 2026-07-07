@@ -16,6 +16,7 @@
 </script>
 
 <div class="editor-container">
+	<!-- svelte-ignore svelte/no-at-html-tags -->
 	<pre class="syntax-overlay" bind:this={preRef} aria-hidden="true"><code class="language-yaml"
 			>{@html Prism.highlight(value, Prism.languages.yaml, 'yaml')}</code
 		><br /></pre>

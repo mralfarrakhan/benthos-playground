@@ -41,6 +41,7 @@
 	</div>
 	<p class="subtitle">Real-time pipeline monitoring and observability</p>
 	<div class="header-actions">
+		<!-- svelte-ignore svelte/no-navigation-without-resolve -->
 		<a href="/new" class="add-btn">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -113,6 +114,7 @@
 						</div>
 					</div>
 					<div class="card-footer">
+						<!-- svelte-ignore svelte/no-navigation-without-resolve -->
 						<a
 							href="/streams/{id}"
 							class="action-btn"

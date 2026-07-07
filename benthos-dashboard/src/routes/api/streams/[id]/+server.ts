@@ -35,7 +35,7 @@ export const GET: RequestHandler = async ({ params }) => {
 				// multiline strings (with \n) into proper YAML block scalars (using |)
 				config = YAML.stringify(actualConfig);
 			}
-		} catch (e) {
+		} catch {
 			// Not JSON, presumably it's raw YAML already. Leave it as is.
 		}
 

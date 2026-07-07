@@ -34,9 +34,11 @@
 			}
 
 			// Success, redirect to home
+			// eslint-disable-next-line svelte/no-navigation-without-resolve
 			goto('/');
-		} catch (err: any) {
-			errorMsg = err.message || String(err);
+		} catch (err) {
+			const errorMessage = err instanceof Error ? err.message : String(err);
+			errorMsg = errorMessage;
 		} finally {
 			submitting = false;
 		}
@@ -55,6 +57,7 @@
 </header>
 
 <main class="dashboard-main form-container">
+	<!-- svelte-ignore svelte/no-navigation-without-resolve -->
 	<a href="/" class="back-link">
 		<svg
 			xmlns="http://www.w3.org/2000/svg"

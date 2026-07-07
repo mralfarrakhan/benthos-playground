@@ -16,8 +16,9 @@
 			if (!res.ok) throw new Error(await res.text());
 			const data = await res.json();
 			yamlConfig = data.config;
-		} catch (err: any) {
-			errorMsg = err.message || 'Failed to load configuration.';
+		} catch (err) {
+			const errorMessage = err instanceof Error ? err.message : String(err);
+			errorMsg = errorMessage || 'Failed to load configuration.';
 		} finally {
 			loading = false;
 		}
@@ -36,9 +37,11 @@
 
 			if (!res.ok) throw new Error(await res.text());
 			// Show temporary success or just navigate
+			// eslint-disable-next-line svelte/no-navigation-without-resolve
 			goto('/');
-		} catch (err: any) {
-			errorMsg = err.message || String(err);
+		} catch (err) {
+			const errorMessage = err instanceof Error ? err.message : String(err);
+			errorMsg = errorMessage;
 		} finally {
 			submitting = false;
 		}
@@ -56,9 +59,11 @@
 			});
 
 			if (!res.ok) throw new Error(await res.text());
+			// eslint-disable-next-line svelte/no-navigation-without-resolve
 			goto('/');
-		} catch (err: any) {
-			errorMsg = err.message || String(err);
+		} catch (err) {
+			const errorMessage = err instanceof Error ? err.message : String(err);
+			errorMsg = errorMessage;
 			submitting = false;
 		}
 	};
@@ -77,6 +82,7 @@
 </header>
 
 <main class="dashboard-main form-container">
+	<!-- svelte-ignore svelte/no-navigation-without-resolve -->
 	<a href="/" class="back-link">
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
