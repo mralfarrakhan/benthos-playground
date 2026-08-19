@@ -1,3 +1,4 @@
 /streams/*.yaml
 /config/*.yaml
 .env
+docker-compose.*.yaml

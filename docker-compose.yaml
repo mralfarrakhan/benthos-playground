@@ -68,17 +68,3 @@ services:
       - ./.env:/app/.env:ro
     restart: unless-stopped
 
-  go-fds:
-    image: golang:1.24
-    container_name: go-fraud-detection-system
-    working_dir: /app
-    volumes:
-      - ../go-fraud-detection-system:/app
-      # Mount the go mod cache to avoid needing Bitbucket SSH keys inside the container
-      - /Users/splinter/go/pkg/mod:/go/pkg/mod:ro
-      # Mounted to /config/config.yaml because cmd/http/main.go uses WithConfigFileSearchPaths("/config")
-      - ./config/fds.yaml:/config/config.yaml:ro
-    command: go run cmd/http/main.go
-    ports:
-      - "8081:8080"
-    restart: unless-stopped
