@@ -1,8 +1,10 @@
 compose_args := `for f in docker-compose*.yaml; do printf -- "-f %s " "$f"; done`
 
-up:
-    podman compose {{compose_args}} up --build -d
-down:
-    podman compose {{compose_args}} down
+up *FLAGS:
+    docker compose {{compose_args}} up {{FLAGS}}
+down *FLAGS:
+    docker compose {{compose_args}} down {{FLAGS}}
 ps:
-    podman compose {{compose_args}} ps
+    docker compose {{compose_args}} ps
+log service:
+    docker compose {{compose_args}} logs {{service}} -f
