@@ -1,2 +1,3 @@
 /streams/*.yaml
-/streams/*.yml
+/config/*.yaml
+.env
