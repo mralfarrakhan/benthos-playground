@@ -8,3 +8,5 @@ ps:
     docker compose {{compose_args}} ps
 log service:
     docker compose {{compose_args}} logs {{service}} -f
+run command *FLAGS:
+    docker compose {{compose_args}} {{command}} {{FLAGS}}
